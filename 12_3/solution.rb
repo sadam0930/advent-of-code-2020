@@ -1,6 +1,4 @@
 INPUT_FILE = "input.txt"
-SLOPE_X = 3
-SLOPE_Y = 1
 
 def parse_map
   map = Array.new
@@ -17,7 +15,7 @@ def parse_map
   map
 end
 
-def num_trees_on_path
+def num_trees_on_path(slope_x, slope_y)
   map = parse_map
   num_cols = map.first.length
 
@@ -34,11 +32,22 @@ def num_trees_on_path
     end
 
     # move current position
-    cur_x += SLOPE_X
-    cur_y += SLOPE_Y
+    cur_x += slope_x
+    cur_y += slope_y
   end
 
   num_trees
 end
 
-puts "solution 1 is #{num_trees_on_path}"
+def multiple_slopes
+  num_trees_slope_1 = num_trees_on_path(1, 1)
+  num_trees_slope_2 = num_trees_on_path(3, 1)
+  num_trees_slope_3 = num_trees_on_path(5, 1)
+  num_trees_slope_4 = num_trees_on_path(7, 1)
+  num_trees_slope_5 = num_trees_on_path(1, 2)
+
+  num_trees_slope_1 * num_trees_slope_2 * num_trees_slope_3 * num_trees_slope_4 * num_trees_slope_5
+end
+
+puts "solution 1 is #{num_trees_on_path(3, 1)}"
+puts "solution 2 is #{multiple_slopes}"
